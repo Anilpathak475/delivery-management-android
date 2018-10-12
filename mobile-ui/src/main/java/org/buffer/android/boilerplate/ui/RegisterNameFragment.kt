@@ -23,6 +23,6 @@ class RegisterNameFragment : Fragment() {
     }
 
     private fun initButton() {
-        nextButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_registerNameFragment_to_registerEmailFragment))
+        continueButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_registerNameFragment_to_registerEmailFragment))
     }
 }
