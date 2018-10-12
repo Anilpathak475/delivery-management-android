@@ -9,12 +9,9 @@ import org.buffer.android.boilerplate.ui.shared.map
 class LaunchViewModel : ViewModel() {
 
     private val onBoardingCompletedResult = MutableLiveData<OnboardingState>()
-    val launchDestination: LiveData<Event<LaunchDestination>>
+    var launchDestination: LiveData<Event<LaunchDestination>>
 
     init {
-
-        onBoardingCompletedResult.postValue(OnboardingState.PERMITTED(true))
-
         launchDestination = onBoardingCompletedResult.map {
 
             if ((it as? OnboardingState.PERMITTED)?.data == true) {
@@ -28,5 +25,13 @@ class LaunchViewModel : ViewModel() {
     enum class LaunchDestination {
         ON_BOARDING,
         MAIN_ACTIVITY
+    }
+
+    fun onPermissionsGranted() {
+        onBoardingCompletedResult.postValue(OnboardingState.PERMITTED(true))
+    }
+
+    fun onPermissionsDenied() {
+        onBoardingCompletedResult.postValue(OnboardingState.PERMITTED(false))
     }
 }
