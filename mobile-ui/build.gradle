@@ -103,4 +103,5 @@ dependencies {
         exclude module: 'design'
     }
     implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha06'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }

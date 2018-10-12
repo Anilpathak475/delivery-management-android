@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Clean Arch Boilerplate</string>
+    <string name="app_name">Parsl</string>
 
     <string name="label_empty_result">Oops, there are no results to display</string>
     <string name="label_error_result">Oops, there was an error fetching the data</string>
@@ -8,4 +8,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_name">What\'s your name?</string>
+    <string name="hint_name">Enter your name</string>
+    <string name="label_continue_button">Continue</string>
+    <string name="label_email">What\'s your email address?</string>
+    <string name="hint_email">Enter your email</string>
 </resources>
