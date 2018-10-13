@@ -1,4 +1,4 @@
-package org.buffer.android.boilerplate.ui.onboarding
+package org.buffer.android.boilerplate.ui.onboarding.register
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -8,9 +8,18 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.fragment_register_name.*
 import org.buffer.android.boilerplate.ui.R
-
+import org.koin.android.scope.ext.android.bindScope
+import org.koin.android.scope.ext.android.getCurrentScope
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class RegisterNameFragment : Fragment() {
+
+    private val viewModel: RegisterNameViewModel by viewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        bindScope(getCurrentScope())
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -20,10 +29,12 @@ class RegisterNameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initButton()
+        initListeners()
     }
 
-    private fun initButton() {
-        continueButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_registerNameFragment_to_registerEmailFragment))
+    private fun initListeners() {
+        continueButton.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_registerNameFragment_to_registerEmailFragment)
+        }
     }
 }

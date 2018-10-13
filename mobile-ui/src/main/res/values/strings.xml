@@ -7,10 +7,15 @@
     <string name="button_try_again">Try again</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="brand_name">Parsl</string>
     <string name="label_name">What\'s your name?</string>
     <string name="hint_name">Enter your name</string>
     <string name="label_continue_button">Continue</string>
     <string name="label_email">What\'s your email address?</string>
     <string name="hint_email">Enter your email</string>
+    <string name="label_login_button">Login</string>
+    <string name="label_register_button">Register</string>
+    <string name="label_confirmation_header">Almost Done.</string>
+    <string name="label_confirmation_desc">We have sent a confirmation link to your email. Please go to your email to complete your registration.</string>
+    <string name="label_confirmation_button">I have confirmed the link</string>
 </resources>

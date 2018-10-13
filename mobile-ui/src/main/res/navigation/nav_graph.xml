@@ -3,11 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/registerNameFragment">
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="org.buffer.android.boilerplate.ui.onboarding.launch.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="org.buffer.android.boilerplate.ui.onboarding.launch.WelcomeFragment"
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome" >
+        <action
+            android:id="@+id/action_welcomeFragment_to_registerNameFragment"
+            app:destination="@id/registerNameFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 
     <fragment
         android:id="@+id/registerNameFragment"
-        android:name="org.buffer.android.boilerplate.ui.onboarding.RegisterNameFragment"
+        android:name="org.buffer.android.boilerplate.ui.onboarding.register.RegisterNameFragment"
         android:label="fragment_register_name"
         tools:layout="@layout/fragment_register_name" >
         <action
@@ -18,9 +41,24 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+
     <fragment
         android:id="@+id/registerEmailFragment"
-        android:name="org.buffer.android.boilerplate.ui.onboarding.RegisterEmailFragment"
+        android:name="org.buffer.android.boilerplate.ui.onboarding.register.RegisterEmailFragment"
         android:label="fragment_register_email"
-        tools:layout="@layout/fragment_register_email" />
+        tools:layout="@layout/fragment_register_email" >
+        <action
+            android:id="@+id/action_registerEmailFragment_to_confirmationFragment"
+            app:destination="@id/confirmationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/confirmationFragment"
+        android:name="org.buffer.android.boilerplate.ui.onboarding.register.ConfirmationFragment"
+        android:label="fragment_confirmation"
+        tools:layout="@layout/fragment_confirmation" />
 </navigation>
