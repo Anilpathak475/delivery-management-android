@@ -37,6 +37,7 @@ class WelcomeFragment : Fragment() {
     private fun initListeners() {
         loginButton.setOnClickListener {}
         registerButton.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_welcomeFragment_to_registerNameFragment) }
+        loginButton.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_welcomeFragment_to_loginFragment) }
     }
 
 

@@ -6,7 +6,7 @@
     <string name="button_check_again">Check again</string>
     <string name="button_try_again">Try again</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="brand_name">Parsl</string>
     <string name="label_name">What\'s your name?</string>
     <string name="hint_name">Enter your name</string>
@@ -18,4 +18,7 @@
     <string name="label_confirmation_header">Almost Done.</string>
     <string name="label_confirmation_desc">We have sent a confirmation link to your email. Please go to your email to complete your registration.</string>
     <string name="label_confirmation_button">I have confirmed the link</string>
+    <string name="hint_login_email_address">Email address</string>
+    <string name="hint_login_password">Password</string>
+    <string name="label_forgot_password_link">Forgot password?</string>
 </resources>

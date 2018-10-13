@@ -9,7 +9,7 @@
     </style>
 
     <style name="brandNamStyle" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@android:color/holo_green_dark</item>
+        <item name="android:textColor">@color/parslGreen</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textSize">72sp</item>
         <item name="android:textStyle">bold</item>
@@ -25,7 +25,15 @@
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textSize">18sp</item>
     </style>
-
-
+    <style name="linkStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/holo_red_light</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="onboardingTextInputStyle" parent="Base.Widget.MaterialComponents.TextInputEditText">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:singleLine">true</item>
+    </style>
 
 </resources>
