@@ -18,8 +18,10 @@
     <string name="hint_email">Enter your email</string>
 
     <!-- Welcome Screen -->
+    <string name="link_login_button">Already have an account? Login</string>
     <string name="label_login_button">Login</string>
-    <string name="label_register_button">Register</string>
+    <string name="label_register_button">Register with Parsl</string>
+    <string name="label_register_desc">Dedicated supply chain technology, for the cannabis industry</string>
 
     <!-- Confirmation Screen-->
     <string name="label_confirmation_header">Almost Done.</string>
@@ -30,5 +32,8 @@
     <string name="hint_login_email_address">Email address</string>
     <string name="hint_login_password">Password</string>
     <string name="label_forgot_password_link">Forgot password?</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

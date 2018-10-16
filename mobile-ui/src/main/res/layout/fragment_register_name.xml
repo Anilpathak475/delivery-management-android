@@ -36,6 +36,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
             android:hint="@string/hint_name"
+            android:inputType="textPersonName"
             android:singleLine="true"
             android:textSize="24sp" />
     </android.support.design.widget.TextInputLayout>
