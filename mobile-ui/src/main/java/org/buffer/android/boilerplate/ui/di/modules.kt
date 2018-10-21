@@ -20,6 +20,12 @@ import org.buffer.android.boilerplate.ui.UiThread
 import org.buffer.android.boilerplate.ui.browse.BrowseAdapter
 import org.buffer.android.boilerplate.ui.browse.BrowseBufferoosViewModel
 import org.buffer.android.boilerplate.ui.onboarding.LaunchViewModel
+import org.buffer.android.boilerplate.ui.onboarding.launch.SplashViewModel
+import org.buffer.android.boilerplate.ui.onboarding.launch.WelcomeViewModel
+import org.buffer.android.boilerplate.ui.onboarding.login.LoginViewModel
+import org.buffer.android.boilerplate.ui.onboarding.register.ConfirmationViewModel
+import org.buffer.android.boilerplate.ui.onboarding.register.RegisterNameViewModel
+import org.buffer.android.boilerplate.ui.onboarding.register.RegisterEmailViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
@@ -56,4 +62,10 @@ val browseModule = module("Browse", override = true) {
 
 val onboardingModule = module("Onboarding", override = true) {
     viewModel { LaunchViewModel() }
+    viewModel { SplashViewModel() }
+    viewModel { WelcomeViewModel() }
+    viewModel { RegisterNameViewModel() }
+    viewModel { RegisterEmailViewModel() }
+    viewModel { LoginViewModel() }
+    viewModel { ConfirmationViewModel() }
 }

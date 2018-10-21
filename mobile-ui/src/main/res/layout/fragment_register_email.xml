@@ -12,11 +12,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:fontFamily="sans-serif"
         android:text="@string/label_email"
-        android:textColor="@android:color/black"
-        android:textSize="36sp"
-        android:textStyle="bold"
+        style="@style/headerStyle"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -35,12 +32,11 @@
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/nameTextInputEditText"
+            style="@style/onboardingTextInputStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
             android:hint="@string/hint_email"
-            android:singleLine="true"
-            android:textSize="24sp" />
+            android:inputType="textWebEmailAddress" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
