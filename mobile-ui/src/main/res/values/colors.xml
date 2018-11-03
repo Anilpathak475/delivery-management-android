@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#FFFFFF</color>
-    <color name="colorPrimaryDark">#000000</color   >
+    <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#C0C0C0</color>
     <color name="parslGreen">#0f4915</color>
+    <color name="parslLightGreen">#FF7CC576</color>
+    <color name="indicator_unselected">#4D000000</color>
 </resources>

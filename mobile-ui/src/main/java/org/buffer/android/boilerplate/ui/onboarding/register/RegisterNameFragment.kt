@@ -34,7 +34,7 @@ class RegisterNameFragment : Fragment() {
 
     private fun initListeners() {
         continueButton.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_registerNameFragment_to_registerEmailFragment)
+            Navigation.findNavController(it).navigate(R.id.action_registerNameFragment_to_confirmationFragment)
         }
     }
 }

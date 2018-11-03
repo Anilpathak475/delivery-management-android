@@ -15,13 +15,19 @@
         <activity
             android:name=".onboarding.LaunchActivity"
             android:theme="@style/AppTheme.TransparentTheme">
+        </activity>
+        <activity
+            android:name=".home.MainActivity"
+            android:theme="@style/AppTheme.TransparentTheme"></activity>
+        <activity
+            android:name=".onboardingv2.WelcomeWizardActivity"
+            android:label="@string/title_activity_welcome_wizard"
+            android:theme="@style/AppTheme.TransparentTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".home.MainActivity"></activity>
     </application>
 
 </manifest>

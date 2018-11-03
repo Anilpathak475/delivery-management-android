@@ -34,6 +34,6 @@ class RegisterEmailFragment : Fragment() {
     }
 
     private fun initListeners() {
-        continueButton.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_registerEmailFragment_to_confirmationFragment) }
+
     }
 }

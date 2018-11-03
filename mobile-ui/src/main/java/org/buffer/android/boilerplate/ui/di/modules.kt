@@ -19,6 +19,7 @@ import org.buffer.android.boilerplate.ui.BuildConfig
 import org.buffer.android.boilerplate.ui.UiThread
 import org.buffer.android.boilerplate.ui.browse.BrowseAdapter
 import org.buffer.android.boilerplate.ui.browse.BrowseBufferoosViewModel
+import org.buffer.android.boilerplate.ui.home.MainViewModel
 import org.buffer.android.boilerplate.ui.onboarding.LaunchViewModel
 import org.buffer.android.boilerplate.ui.onboarding.launch.SplashViewModel
 import org.buffer.android.boilerplate.ui.onboarding.launch.WelcomeViewModel
@@ -68,4 +69,8 @@ val onboardingModule = module("Onboarding", override = true) {
     viewModel { RegisterEmailViewModel() }
     viewModel { LoginViewModel() }
     viewModel { ConfirmationViewModel() }
+}
+
+val mainModule = module("main", override = true) {
+    viewModel { MainViewModel() }
 }
