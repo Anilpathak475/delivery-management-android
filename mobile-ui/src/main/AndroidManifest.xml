@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.buffer.android.boilerplate.ui">
+    package="co.parsl.android.ui">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -8,26 +8,34 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <uses-feature android:name="android.hardware.nfc" android:required="true" />
+
     <application
-        android:name=".BufferooApplication"
+        android:name="co.parsl.android.boilerplate.ui.ParslApplication"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".onboarding.LaunchActivity"
-            android:theme="@style/AppTheme.TransparentTheme">
-        </activity>
-        <activity
-            android:name=".home.MainActivity"
+            android:name="co.parsl.android.boilerplate.ui.onboarding.LaunchActivity"
             android:theme="@style/AppTheme.TransparentTheme"></activity>
         <activity
-            android:name=".onboardingv2.WelcomeWizardActivity"
-            android:label="@string/title_activity_welcome_wizard"
-            android:theme="@style/AppTheme.TransparentTheme">
+            android:name="co.parsl.android.boilerplate.ui.home.MainActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+
+                <category android:name="android.intent.category.LAUNCHER" />p
             </intent-filter>
         </activity>
+        <activity
+            android:name="co.parsl.android.boilerplate.ui.onboardingv2.WelcomeWizardActivity"
+            android:label="@string/title_activity_welcome_wizard"
+            android:theme="@style/AppTheme.TransparentTheme"></activity>
+        <activity
+            android:name="co.parsl.android.boilerplate.ui.onboarding.login.LoginActivity"
+            android:theme="@style/AppTheme.TransparentTheme"></activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="ea6e6b8fb276d9c75421dcaad0fb5bfbbd210cba" />
     </application>
 
 </manifest>
