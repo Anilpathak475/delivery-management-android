@@ -74,4 +74,6 @@ val onboardingModule = module("Onboarding", override = true) {
 
 val mainModule = module("main", override = true) {
     viewModel { MainViewModel() }
+    factory { BufferooServiceFactory.makeParslService(BuildConfig.DEBUG) }
+
 }

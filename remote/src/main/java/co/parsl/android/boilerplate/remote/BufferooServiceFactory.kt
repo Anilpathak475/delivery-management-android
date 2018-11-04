@@ -22,6 +22,12 @@ object BufferooServiceFactory {
         return makeBufferooService(okHttpClient, makeGson())
     }
 
+    fun makeParslService(isDebug: Boolean): ParslService {
+        val okHttpClient = makeOkHttpClient(
+                makeLoggingInterceptor(isDebug))
+        return makeParslService(okHttpClient, makeGson())
+    }
+
     private fun makeBufferooService(okHttpClient: OkHttpClient, gson: Gson): BufferooService {
         val retrofit = Retrofit.Builder()
                 .baseUrl("https://joe-birch-dsdb.squarespace.com/s/")
@@ -30,6 +36,15 @@ object BufferooServiceFactory {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
         return retrofit.create(BufferooService::class.java)
+    }
+
+    private fun makeParslService(okHttpClient: OkHttpClient, gson: Gson): ParslService {
+        val retrofit = Retrofit.Builder()
+                .baseUrl("https://deuyqjqhc2.execute-api.eu-west-1.amazonaws.com/v6/")
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build()
+        return retrofit.create(ParslService::class.java)
     }
 
     private fun makeOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {

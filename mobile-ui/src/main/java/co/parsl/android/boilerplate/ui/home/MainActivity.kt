@@ -42,6 +42,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var techListsArray: Array<Array<String>>
 
+    private var nfcTagListener: NfcTagListener? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         setTheme(R.style.AppTheme_TransparentTheme)
@@ -118,18 +120,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     public override fun onNewIntent(intent: Intent) {
-        val message = retrieveNFCMessage(intent);
+        Log.d("NFC", "<!--- NFC Detected with Message")
+        Log.d("NFC", "<!--- NFC Detected with Message = ${intent.action}" )
+        val message = retrieveNFCMessage(intent)
         Log.d("NFC", "<!--- NFC Detected with Message = $message --->")
-        /*tagIdTextView.text =  if (message == "") {
-            "Blank Tag"
+        Log.d("NFC", "<!--- NFC Listener  = $nfcTagListener --->")
+
+       if (message == "") {
+           nfcTagListener?.onNfcTagRead("Blank Tag")
         } else {
-            message
-        }*/
+           nfcTagListener?.onNfcTagRead(message)
+        }
      }
 
     private fun retrieveNFCMessage(intent: Intent?): String {
         intent?.let {
-            if (NfcAdapter.ACTION_TECH_DISCOVERED == intent.action) {
+            if (NfcAdapter.ACTION_TECH_DISCOVERED == intent.action || NfcAdapter.ACTION_NDEF_DISCOVERED == intent.action) {
                 val nDefMessages = getNDefMessages(intent)
                 nDefMessages[0].records?.let {
                     it.forEach {
@@ -168,6 +174,7 @@ class MainActivity : AppCompatActivity() {
         val PREFERENCES_FILE = "parsl.co"
         val PREF_USER_FIRST_TIME = "user_first_time"
         val PREF_USER_LOGGED_IN = "user_logged_in"
+        val PREF_USER_ID_TOKEN = "user_id_token"
 
         fun readSharedSetting(ctx: Context, settingName: String, defaultValue: String): String? {
             val sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE)
@@ -237,5 +244,9 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    fun setNfcTagListener(listener: NfcTagListener?) {
+        nfcTagListener = listener
     }
 }

@@ -15,5 +15,4 @@ interface BufferooService {
     class BufferooResponse {
         lateinit var team: List<BufferooModel>
     }
-
 }

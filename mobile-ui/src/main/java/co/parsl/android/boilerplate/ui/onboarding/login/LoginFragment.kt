@@ -101,9 +101,9 @@ class LoginFragment : Fragment() {
                 progressBar.visibility = View.GONE
                 status.set(false)
 
-
                 activity!!.finish()
                 MainActivity.saveSharedSetting(activity!!.applicationContext, MainActivity.PREF_USER_LOGGED_IN, "true")
+                MainActivity.saveSharedSetting(activity!!.applicationContext, MainActivity.PREF_USER_ID_TOKEN, userSession?.idToken!!.jwtToken)
                 startActivity(Intent(activity,MainActivity::class.java ))
                 //findNavController.navigate(R.id.action_loginFragment_to_nav_graph_main)
             }
