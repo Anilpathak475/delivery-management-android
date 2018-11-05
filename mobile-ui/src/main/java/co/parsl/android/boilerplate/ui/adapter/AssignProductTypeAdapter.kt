@@ -10,15 +10,12 @@ import android.widget.TextView
 import co.parsl.android.boilerplate.ui.model.AssignProductType
 import co.parsl.android.ui.R
 
-class AssignProductTypeAdapter constructor(assignProductTypes: ArrayList<AssignProductType>, context: Context, val btnlistener: BtnClickListener) : RecyclerView.Adapter<AssignProductTypeAdapter.CustomViewHolder>() {
+class AssignProductTypeAdapter constructor(var context: Context, btnlistener: BtnClickListener) : RecyclerView.Adapter<AssignProductTypeAdapter.CustomViewHolder>() {
 
-    var assignProductTypes: ArrayList<AssignProductType> = arrayListOf()
-    lateinit var context: Context
+    var assignProductTypes = mutableListOf<AssignProductType>()
     var mClickListener: BtnClickListener? = null
 
     init {
-        this.assignProductTypes = assignProductTypes
-        this.context = context
         this.mClickListener = btnlistener
     }
 
@@ -53,7 +50,7 @@ class AssignProductTypeAdapter constructor(assignProductTypes: ArrayList<AssignP
         }
     }
 
-    open interface BtnClickListener {
+    interface BtnClickListener {
         fun onBtnClick(position: Int)
     }
 }
