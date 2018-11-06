@@ -8,11 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import co.parsl.android.boilerplate.remote.BufferooServiceFactory
 import co.parsl.android.boilerplate.remote.ParslService
 import co.parsl.android.boilerplate.remote.model.TagInfoPojo
 import co.parsl.android.ui.BuildConfig
 import co.parsl.android.ui.R
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -38,8 +41,8 @@ class HomeFragment : Fragment(), NfcTagListener {
 
             override fun onResponse(call: Call<TagInfoPojo>, response: Response<TagInfoPojo>) {
                 progressDialog.hide()
-                Toast.makeText(activity, "${response.body().toString()}", Toast.LENGTH_LONG).show()
-                Log.d("Retrofit", "onResponse: ")
+                val action: HomeFragmentDirections.ActionHomeFragmentToTagInfoFragment = HomeFragmentDirections.actionHomeFragmentToTagInfoFragment(response.body()!!.uniqueId?:"", response.body()!!.assignedUrl?:"" , response.body()!!.status?:"", "", "", "", "", "")
+                navController.navigate(action)
             }
 
         })
@@ -56,8 +59,11 @@ class HomeFragment : Fragment(), NfcTagListener {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+    private lateinit var navController: NavController
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
         initListeners()
     }
 
@@ -74,6 +80,10 @@ class HomeFragment : Fragment(), NfcTagListener {
             } else {
                 disableAssign()
             }
+        }
+
+        scanRangeButton.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_scanRange)
         }
     }
 

@@ -21,18 +21,15 @@
         android:id="@+id/textView8"
         style="@style/descriptionStyle"
         android:layout_width="0dp"
-        android:layout_height="77dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="8dp"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:text="Scan the Parsl tag by taking your phone close to the tag. To scan multiple tags at once click on \“Scan a range\” from the menu."
         app:layout_constraintBottom_toTopOf="@+id/handoverButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoImage"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/assignButton"
@@ -49,7 +46,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        android:enabled="false"/>
+        android:enabled="true"/>
 
     <Button
         android:id="@+id/handoverButton"
@@ -65,7 +62,7 @@
         app:layout_constraintEnd_toStartOf="@+id/scanRangeButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/assignButton"
-        android:enabled="false"/>
+        android:enabled="true"/>
 
     <Button
         android:id="@+id/scanRangeButton"
@@ -81,13 +78,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/handoverButton"
-        android:enabled="false"/>
+        android:enabled="true"/>
 
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="64dp"
         android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

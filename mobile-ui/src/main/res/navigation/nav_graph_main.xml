@@ -9,5 +9,34 @@
         android:id="@+id/homeFragment"
         android:name="co.parsl.android.boilerplate.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_tagInfoFragment"
+            app:destination="@id/tagInfoFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_scanRange"
+            app:destination="@id/scanRange" />
+    </fragment>
+    <fragment
+        android:id="@+id/tagInfoFragment"
+        android:name="co.parsl.android.boilerplate.ui.home.TagInfoFragment"
+        android:label="fragment_tag_info"
+        tools:layout="@layout/fragment_tag_info" >
+        <argument android:name="uniqueId" app:argType="string" />
+        <argument android:name="assignedUrl" app:argType="string" />
+        <argument android:name="status" app:argType="string" />
+        <argument android:name="internalId" app:argType="string" />
+        <argument android:name="manufacturerId" app:argType="string" />
+        <argument android:name="manufacturerGeneratedUuid" app:argType="string" />
+        <argument android:name="responsibleUser" app:argType="string" />
+        <argument android:name="orderId" app:argType="string" />
+        <action
+            android:id="@+id/action_tagInfoFragment_to_scanRange2"
+            app:destination="@id/scanRange" />
+    </fragment>
+    <fragment
+        android:id="@+id/scanRange"
+        android:name="co.parsl.android.boilerplate.ui.home.ScanRange"
+        android:label="fragment_scan_range"
+        tools:layout="@layout/fragment_scan_range" />
 </navigation>
