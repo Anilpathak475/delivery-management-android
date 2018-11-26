@@ -23,6 +23,7 @@ import retrofit2.Response
 
 class HomeFragment : Fragment(), NfcTagListener {
 
+    //TODO Inject Retrofit service
     val parslService : ParslService = BufferooServiceFactory.makeParslService(BuildConfig.DEBUG)
 
     override fun onNfcTagRead(message: String) {
