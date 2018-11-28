@@ -17,3 +17,7 @@ interface ParslService {
 
     data class GetTagInfoResponse(val tagInfo: TagInfoModel)
 }
+
+//Get products - Select Product
+//Get product batches by product
+////Product batch assign
