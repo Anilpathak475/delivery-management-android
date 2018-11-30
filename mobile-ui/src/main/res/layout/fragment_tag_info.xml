@@ -93,9 +93,8 @@
 
         <Button
             android:id="@+id/assignButton"
-            android:layout_width="0dp"
+            android:layout_width="177dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:background="@color/parslLightGreen"
             android:drawableTop="@drawable/ic_assignment"
             android:enabled="false"
@@ -107,13 +106,13 @@
             app:layout_constraintEnd_toStartOf="@+id/handoverButton"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sendConfirm" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/handoverButton"
-            android:layout_width="0dp"
+            android:layout_width="193dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:background="@color/parslLightGreen"
             android:drawableTop="@drawable/ic_handover"
             android:enabled="false"
@@ -122,78 +121,20 @@
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/scanRangeButton"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/assignButton" />
 
+
         <Button
-            android:id="@+id/scanRangeButton"
-            android:layout_width="0dp"
+            android:id="@+id/cancleButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/parslLightGreen"
-            android:drawableTop="@drawable/ic_scan_range"
-            android:enabled="false"
-            android:padding="8dp"
-            android:text="Scan a range"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="Handover"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/handoverButton" />
-
-        <TextView
-            android:id="@+id/txt_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:text="TextView"
-            android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tagStatus"
-            tools:text="Available,Send" />
-
-        <Button
-            android:id="@+id/sendButton"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:text="Send"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_status" />
-
-        <Button
-            android:id="@+id/receiveButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:text="Receive"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_status" />
-
-        <Button
-            android:id="@+id/sendConfirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:text="Send Confirm"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sendButton" />
-
-        <Button
-            android:id="@+id/receiveConfirmButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:text="Receive Confirm"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/receiveButton" />
+            app:layout_constraintTop_toBottomOf="@+id/tagStatus" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

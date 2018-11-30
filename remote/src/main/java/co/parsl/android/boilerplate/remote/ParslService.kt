@@ -1,12 +1,10 @@
 package co.parsl.android.boilerplate.remote
 
+import co.parsl.android.boilerplate.remote.model.Ledger
 import co.parsl.android.boilerplate.remote.model.TagInfoModel
 import co.parsl.android.boilerplate.remote.model.TagInfoPojo
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ParslService {
 
@@ -20,7 +18,7 @@ interface ParslService {
 
     @GET("secured/tags/{tagId}/ledger")
     fun getLedger(@Path("tagId") tagId : String,
-                      @Header("Authorization") token : String) : Call<Void>
+                      @Header("Authorization") token : String) : Call<Ledger>
 
     /*
     {
@@ -41,10 +39,11 @@ interface ParslService {
     }
      */
 
-    @POST("secured/tags/{tagId}/handover?action={handoverAction}")
+    @POST("secured/tags/{tagId}/handover")
     fun postHandoverAction(@Path("tagId") tagId : String,
-                           @Path("handoverAction") handoverAction: String,
+                           @Query("action") handoverAction: String,
                            @Header("Authorization") token : String) : Call<Void>
+
 
 }
 

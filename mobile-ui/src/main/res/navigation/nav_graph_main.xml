@@ -13,9 +13,7 @@
         <action
             android:id="@+id/action_homeFragment_to_tagInfoFragment"
             app:destination="@id/tagInfoFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_scanRange"
-            app:destination="@id/scanRange" />
+
     </fragment>
     <fragment
         android:id="@+id/tagInfoFragment"
@@ -31,7 +29,7 @@
         <argument android:name="responsibleUser" app:argType="string" />
         <argument android:name="orderId" app:argType="string" />
         <action
-            android:id="@+id/action_tagInfoFragment_to_scanRange2"
+            android:id="@+id/action_tagInfoFragment_to_scanRange"
             app:destination="@id/scanRange" />
     </fragment>
     <fragment

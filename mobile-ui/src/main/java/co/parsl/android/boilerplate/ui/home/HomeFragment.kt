@@ -89,9 +89,7 @@ class HomeFragment : Fragment(), NfcTagListener {
             }
         }
 
-        scanRangeButton.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_scanRange)
-        }
+
 
         logoImage.setOnClickListener {
             getTagInfo()
