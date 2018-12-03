@@ -1,6 +1,7 @@
 package co.parsl.android.boilerplate.ui.home
 
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -30,7 +31,7 @@ class ScanRange : Fragment() {
     var handoverSendConfirm = "HANDOVER_SENDER_CONFIRM"
     var handoverReceiveConfirm = "HANDOVER_RECEIVER_CONFIRM"
     val parslService: ParslService = BufferooServiceFactory.makeParslService(BuildConfig.DEBUG)
-    var t:Timer? = null
+    var t: Timer? = null
     private var action: String = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -49,27 +50,46 @@ class ScanRange : Fragment() {
 
     private fun initListeners() {
         sendHandover.setOnClickListener {
-            action = handoverSend
-            setHandOverAction(handoverSend)
+            val builder = AlertDialog.Builder(activity)
+            builder.setTitle("Handover")
+            builder.setMessage("Do you want to handover this product?")
+
+            builder.setPositiveButton("Yes") { dialog, _ ->
+                dialog.dismiss()
+                action = handoverSend
+                setHandOverAction(handoverSend)
+            }
+            builder.setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+            builder.show()
         }
         receiveHandOver.setOnClickListener {
-            action = handoverReceive
-            setHandOverAction(handoverReceive)
-        }
-        sendHandoverConfirmButton.setOnClickListener {
-            action = handoverSendConfirm
-            setHandOverAction(handoverSendConfirm)
+            val builder = AlertDialog.Builder(activity)
+            builder.setTitle("Handover")
+            builder.setMessage("Do you want to take handover of this product?")
+
+            builder.setPositiveButton("Yes") { dialog, _ ->
+                dialog.dismiss()
+                action = handoverReceive
+                setHandOverAction(handoverReceive)
+            }
+            builder.setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+            builder.show()
 
         }
-        receiveHandoverConfirmButton.setOnClickListener {
-            action = handoverReceiveConfirm
-            setHandOverAction(handoverReceiveConfirm)
-        }
+        /* sendHandoverConfirmButton.setOnClickListener {
+             action = handoverSendConfirm
+             setHandOverAction(handoverSendConfirm)
+
+         }
+         receiveHandoverConfirmButton.setOnClickListener {
+             action = handoverReceiveConfirm
+             setHandOverAction(handoverReceiveConfirm)
+         }*/
 
     }
 
     private fun refreshLedger() {
-        val call: Call<Ledger> = parslService.getLedger("7e6JwXzBkRgA", getToken())
+        val call: Call<Ledger> = parslService.getLedger("edzQkom9wqGD", getToken())
         call.enqueue(object : Callback<Ledger> {
             override fun onFailure(call: Call<Ledger>, t: Throwable) {
                 progressBar2.visibility = View.GONE
@@ -84,21 +104,44 @@ class ScanRange : Fragment() {
                                 handOverStatusTextView.visibility = View.GONE
                                 progressBar2.visibility = View.GONE
                                 t!!.cancel()
-                                sendHandoverConfirmButton.visibility = View.VISIBLE
+                                //  sendHandoverConfirmButton.visibility = View.VISIBLE
+                                val builder = AlertDialog.Builder(activity)
+                                builder.setTitle("Handover")
+                                builder.setMessage("Confirm to take this handover")
+
+                                builder.setPositiveButton("Yes") { dialog, _ ->
+                                    dialog.dismiss()
+                                    action = handoverSendConfirm
+                                    setHandOverAction(handoverSendConfirm)
+                                }
+                                builder.setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+                                builder.show()
+
                             }
                         } else if (action == handoverReceive) {
                             if (element.action == handoverSendConfirm) {
                                 handOverStatusTextView.visibility = View.GONE
                                 progressBar2.visibility = View.GONE
                                 t!!.cancel()
-                                receiveHandoverConfirmButton.visibility = View.VISIBLE
+                                //    receiveHandoverConfirmButton.visibility = View.VISIBLE
+                                val builder = AlertDialog.Builder(activity)
+                                builder.setTitle("Handover")
+                                builder.setMessage("Confirm to take this handover")
+
+                                builder.setPositiveButton("Yes") { dialog, _ ->
+                                    dialog.dismiss()
+                                    action = handoverReceiveConfirm
+                                    setHandOverAction(handoverReceiveConfirm)
+                                }
+                                builder.setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+                                builder.show()
                             }
-                        }else if (action == handoverSendConfirm || action == handoverReceiveConfirm) {
+                        } else if (action == handoverSendConfirm || action == handoverReceiveConfirm) {
                             if (element.action == handoverReceiveConfirm) {
-                                handOverStatusTextView.visibility = View.VISIBLE
                                 progressBar2.visibility = View.GONE
+                                handOverStatusTextView.visibility = View.GONE
                                 t!!.cancel()
-                                handOverStatusTextView.text = "Handover Complete"
+                                handoverDoneImage.visibility = View.VISIBLE
                             }
                         }
                 }
@@ -109,7 +152,7 @@ class ScanRange : Fragment() {
 
     private fun startPooling() {
 //Set the schedule function and rate
-        t =  Timer()
+        t = Timer()
         t!!.scheduleAtFixedRate(object : TimerTask() {
 
             override fun run() {
@@ -124,7 +167,7 @@ class ScanRange : Fragment() {
 
     private fun setHandOverAction(action: String) {
         this.action = action
-        val call: Call<Void> = parslService.postHandoverAction("7e6JwXzBkRgA", action, getToken())
+        val call: Call<Void> = parslService.postHandoverAction("edzQkom9wqGD", action, getToken())
 
         call.enqueue(object : Callback<Void> {
             override fun onFailure(call: Call<Void>, t: Throwable) {
