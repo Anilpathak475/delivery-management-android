@@ -2,8 +2,10 @@ package co.parsl.android.boilerplate.ui.home
 
 
 import android.app.AlertDialog
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +33,8 @@ class ScanRange : Fragment() {
     var handoverSendConfirm = "HANDOVER_SENDER_CONFIRM"
     var handoverReceiveConfirm = "HANDOVER_RECEIVER_CONFIRM"
     val parslService: ParslService = BufferooServiceFactory.makeParslService(BuildConfig.DEBUG)
+    lateinit var yes: String
+    lateinit var no: String
     var t: Timer? = null
     private var action: String = ""
 
@@ -43,6 +47,16 @@ class ScanRange : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        yes = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(" <font color=" + resources.getColor(R.color.parslGreen) + ">Yes</font>", Html.FROM_HTML_MODE_LEGACY).toString()
+        } else {
+            "Yes"
+        }
+        no = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(" <font color=" + resources.getColor(R.color.parslGreen) + ">No</font>", Html.FROM_HTML_MODE_LEGACY).toString()
+        } else {
+            "No"
+        }
 
         initListeners()
     }
@@ -54,12 +68,12 @@ class ScanRange : Fragment() {
             builder.setTitle("Handover")
             builder.setMessage("Do you want to handover this product?")
 
-            builder.setPositiveButton("Yes") { dialog, _ ->
+            builder.setPositiveButton(yes) { dialog, _ ->
                 dialog.dismiss()
                 action = handoverSend
                 setHandOverAction(handoverSend)
             }
-            builder.setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+            builder.setNegativeButton(no) { dialog, _ -> dialog.dismiss() }
             builder.show()
         }
         receiveHandOver.setOnClickListener {
@@ -67,12 +81,12 @@ class ScanRange : Fragment() {
             builder.setTitle("Handover")
             builder.setMessage("Do you want to take handover of this product?")
 
-            builder.setPositiveButton("Yes") { dialog, _ ->
+            builder.setPositiveButton(yes) { dialog, _ ->
                 dialog.dismiss()
                 action = handoverReceive
                 setHandOverAction(handoverReceive)
             }
-            builder.setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+            builder.setNegativeButton(no) { dialog, _ -> dialog.dismiss() }
             builder.show()
 
         }
@@ -89,7 +103,7 @@ class ScanRange : Fragment() {
     }
 
     private fun refreshLedger() {
-        val call: Call<Ledger> = parslService.getLedger("edzQkom9wqGD", getToken())
+        val call: Call<Ledger> = parslService.getLedger("P2zRKxB4bVO8", getToken())
         call.enqueue(object : Callback<Ledger> {
             override fun onFailure(call: Call<Ledger>, t: Throwable) {
                 progressBar2.visibility = View.GONE
@@ -107,14 +121,16 @@ class ScanRange : Fragment() {
                                 //  sendHandoverConfirmButton.visibility = View.VISIBLE
                                 val builder = AlertDialog.Builder(activity)
                                 builder.setTitle("Handover")
-                                builder.setMessage("Confirm to take this handover")
+                                builder.setMessage("Confirm to Make this handover")
 
-                                builder.setPositiveButton("Yes") { dialog, _ ->
+
+                                builder.setPositiveButton(yes) { dialog, _ ->
                                     dialog.dismiss()
                                     action = handoverSendConfirm
                                     setHandOverAction(handoverSendConfirm)
+
                                 }
-                                builder.setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+                                builder.setNegativeButton(no) { dialog, _ -> dialog.dismiss() }
                                 builder.show()
 
                             }
@@ -126,14 +142,14 @@ class ScanRange : Fragment() {
                                 //    receiveHandoverConfirmButton.visibility = View.VISIBLE
                                 val builder = AlertDialog.Builder(activity)
                                 builder.setTitle("Handover")
-                                builder.setMessage("Confirm to take this handover")
+                                builder.setMessage("Confirm to Take this handover")
 
-                                builder.setPositiveButton("Yes") { dialog, _ ->
+                                builder.setPositiveButton(yes) { dialog, _ ->
                                     dialog.dismiss()
                                     action = handoverReceiveConfirm
                                     setHandOverAction(handoverReceiveConfirm)
                                 }
-                                builder.setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+                                builder.setNegativeButton(no) { dialog, _ -> dialog.dismiss() }
                                 builder.show()
                             }
                         } else if (action == handoverSendConfirm || action == handoverReceiveConfirm) {
@@ -162,12 +178,12 @@ class ScanRange : Fragment() {
                 //Set how long before to start calling the TimerTask (in milliseconds)
                 0,
                 //Set the amount of time between each execution (in milliseconds)
-                10000)
+                3000)
     }
 
     private fun setHandOverAction(action: String) {
         this.action = action
-        val call: Call<Void> = parslService.postHandoverAction("edzQkom9wqGD", action, getToken())
+        val call: Call<Void> = parslService.postHandoverAction("P2zRKxB4bVO8", action, getToken())
 
         call.enqueue(object : Callback<Void> {
             override fun onFailure(call: Call<Void>, t: Throwable) {
