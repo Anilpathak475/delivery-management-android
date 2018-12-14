@@ -15,7 +15,6 @@ import co.parsl.android.boilerplate.remote.ParslService
 import co.parsl.android.boilerplate.remote.model.TagInfoPojo
 import co.parsl.android.ui.BuildConfig
 import co.parsl.android.ui.R
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -46,13 +45,16 @@ class HomeFragment : Fragment(), NfcTagListener {
 
             override fun onResponse(call: Call<TagInfoPojo>, response: Response<TagInfoPojo>) {
                 progressDialog.hide()
-                val action: HomeFragmentDirections.ActionHomeFragmentToTagInfoFragment = HomeFragmentDirections.actionHomeFragmentToTagInfoFragment(response.body()!!.uniqueId
-                        ?: "", response.body()!!.assignedUrl ?: "", response.body()!!.status
-                        ?: "", "", "", "", "", "")
-                navController.navigate(action)
+                if (response.isSuccessful) {
+                    val action: HomeFragmentDirections.ActionHomeFragmentToTagInfoFragment = HomeFragmentDirections.actionHomeFragmentToTagInfoFragment(response.body()!!.uniqueId
+                            ?: "", response.body()!!.assignedUrl ?: "", response.body()!!.status
+                            ?: "", "", "", "", "", "")
+                    navController.navigate(action)
+                }
             }
 
         })
+
     }
 
     private fun getToken(): String {
@@ -77,7 +79,7 @@ class HomeFragment : Fragment(), NfcTagListener {
     private fun initListeners() {
 
         Log.d("NFC", "<!--- NFC Setting listener")
-        (activity as MainActivity)?.setNfcTagListener(this)
+        (activity as MainActivity).setNfcTagListener(this)
 
         assignButton.setOnClickListener {
             it.isEnabled = !it.isEnabled
@@ -109,7 +111,7 @@ class HomeFragment : Fragment(), NfcTagListener {
     override fun onDestroyView() {
         super.onDestroyView()
         Log.d("NFC", "<!--- NFC setting listener as null")
-        (activity as MainActivity)?.setNfcTagListener(null)
+        (activity as MainActivity).setNfcTagListener(null)
     }
 
 }

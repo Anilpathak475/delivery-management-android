@@ -31,10 +31,35 @@
         <action
             android:id="@+id/action_tagInfoFragment_to_scanRange"
             app:destination="@id/scanRange" />
+        <action
+            android:id="@+id/action_tagInfoFragment_to_getProductCategories"
+            app:destination="@id/getProductCategories" />
     </fragment>
     <fragment
         android:id="@+id/scanRange"
         android:name="co.parsl.android.boilerplate.ui.home.ScanRange"
         android:label="fragment_scan_range"
         tools:layout="@layout/fragment_scan_range" />
+    <fragment
+        android:id="@+id/getProductCategories"
+        android:name="co.parsl.android.ui.SelectProductCategories"
+        android:label="GetProductCategories">
+        <action
+            android:id="@+id/action_getProductCategories_to_selectProductFragment"
+            app:destination="@id/selectProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectProductFragment"
+        android:name="co.parsl.android.ui.SelectProductFragment"
+        android:label="fragment_select_product"
+        tools:layout="@layout/fragment_select_product">
+        <action
+            android:id="@+id/action_selectProductFragment_to_selectProductBatch"
+            app:destination="@id/selectProductBatch" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectProductBatch"
+        android:name="co.parsl.android.ui.SelectProductBatch"
+        android:label="fragment_select_product_batch"
+        tools:layout="@layout/fragment_select_product_batch" />
 </navigation>

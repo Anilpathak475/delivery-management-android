@@ -103,7 +103,7 @@ class ScanRange : Fragment() {
     }
 
     private fun refreshLedger() {
-        val call: Call<Ledger> = parslService.getLedger("P2zRKxB4bVO8", getToken())
+        val call: Call<Ledger> = parslService.getLedger("YW2lKB6dKgOa", getToken())
         call.enqueue(object : Callback<Ledger> {
             override fun onFailure(call: Call<Ledger>, t: Throwable) {
                 progressBar2.visibility = View.GONE
@@ -183,7 +183,7 @@ class ScanRange : Fragment() {
 
     private fun setHandOverAction(action: String) {
         this.action = action
-        val call: Call<Void> = parslService.postHandoverAction("P2zRKxB4bVO8", action, getToken())
+        val call: Call<Void> = parslService.postHandoverAction("YW2lKB6dKgOa", action, getToken())
 
         call.enqueue(object : Callback<Void> {
             override fun onFailure(call: Call<Void>, t: Throwable) {

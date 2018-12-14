@@ -27,7 +27,7 @@
         android:layout_marginBottom="8dp"
         android:gravity="center_horizontal"
         android:text="Scan the Parsl tag by taking your phone close to the tag. To scan multiple tags at once click on \“Scan a range\” from the menu."
-        app:layout_constraintBottom_toTopOf="@+id/handoverButton"
+        app:layout_constraintBottom_toTopOf="@+id/hand"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -42,14 +42,14 @@
         android:textColor="@android:color/white"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/handoverButton"
+        app:layout_constraintEnd_toStartOf="@+id/hand"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         android:enabled="true"/>
 
     <Button
-        android:id="@+id/handoverButton"
+        android:id="@+id/hand"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/parslLightGreen"
@@ -77,7 +77,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/handoverButton"
+        app:layout_constraintStart_toEndOf="@+id/hand"
         android:enabled="true"/>
 
     <ImageView

@@ -1,4 +1,4 @@
-package co.parsl.android.boilerplate.ui
+package co.parsl.android.ui
 
 import android.app.Activity
 import android.os.Bundle
@@ -8,20 +8,27 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import co.parsl.android.boilerplate.remote.BufferooServiceFactory
+import co.parsl.android.boilerplate.remote.ParslService
 import co.parsl.android.boilerplate.ui.adapter.AssignProductTypeAdapter
 import co.parsl.android.boilerplate.ui.model.AssignProductType
 import co.parsl.android.boilerplate.ui.widget.ConformationPopUp
 import co.parsl.android.boilerplate.ui.widget.DialogCallback
 import co.parsl.android.boilerplate.ui.widget.NotifyPopUp
-import co.parsl.android.ui.R
-import kotlinx.android.synthetic.main.fragment_assign_product_type.*
+import kotlinx.android.synthetic.main.select_product_catogries.*
 
-class AssignProductTypeFragment : Fragment() {
+class SelectProductCategories : Fragment() {
+
+    val parslService: ParslService = BufferooServiceFactory.makeParslService(BuildConfig.DEBUG)
 
     lateinit var adapter: AssignProductTypeAdapter
     lateinit var activityInstance :Activity
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_assign_product_type, container, false)
+        return inflater.inflate(R.layout.select_product_catogries, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setAdapter()
         activityInstance = this.activity!!
         edt_product_type.addTextChangedListener(object : TextWatcher {
@@ -37,7 +44,6 @@ class AssignProductTypeFragment : Fragment() {
                 updateAdapter(edt_product_type.text.toString())
             }
         })
-        return view
     }
 
     private fun setAdapter() {
