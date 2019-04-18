@@ -20,14 +20,13 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.navigation.Navigation
-import kotlinx.android.synthetic.main.activity_main.*
 import co.parsl.android.boilerplate.ui.onboarding.LaunchActivity
 import co.parsl.android.boilerplate.ui.onboarding.login.LoginActivity
 import co.parsl.android.ui.R
+import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.scope.ext.android.bindScope
 import org.koin.android.scope.ext.android.getCurrentScope
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity() {
@@ -66,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         if (isNFCEnabled()) {
             configureNFC()
         }else{
-           Toast.makeText(this, "NFC not found or has not been enabled", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "NFC not found or has not been enabled", Toast.LENGTH_LONG).show()
         }
     }
 

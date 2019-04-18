@@ -1,73 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="30dp"
-        android:elevation="4dp"
-        app:cardCornerRadius="4dp"
-        app:contentPadding="10dp">
-
-        <LinearLayout
+    <!--    <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
-            <android.support.v7.widget.CardView
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="30dp"
+            android:elevation="4dp"
+            app:cardCornerRadius="4dp"
+            app:contentPadding="10dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="5dp"
-                app:cardCornerRadius="22dp"
-                app:contentPadding="5dp">
+                android:orientation="vertical">
 
-                <RelativeLayout
+                <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    app:cardCornerRadius="22dp"
+                    app:contentPadding="5dp">
 
-                    <ImageView
-                        android:id="@+id/img_search"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="5dp"
-                        android:background="@drawable/search" />
-
-                    <EditText
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="-1dp"
-                        android:layout_marginEnd="10dp"
-                        android:id="@+id/edt_product_type"
-                        android:layout_toEndOf="@id/img_search"
-                        android:background="@null"
-                        android:hint="Start typing to search" />
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/img_search"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="5dp"
+                            android:background="@drawable/search" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginStart="-1dp"
+                            android:layout_marginEnd="10dp"
+                            android:id="@+id/edt_product_type"
+                            android:layout_toEndOf="@id/img_search"
+                            android:background="@null"
+                            android:hint="Start typing to search" />
 
 
-                </RelativeLayout>
+                    </RelativeLayout>
 
 
-            </android.support.v7.widget.CardView>
+                </android.support.v7.widget.CardView>-->
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_product_results"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="5dp" />
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-</LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_product_results"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.012" />
+    <!--        </LinearLayout>
+        </android.support.v7.widget.CardView>-->
+</android.support.constraint.ConstraintLayout>

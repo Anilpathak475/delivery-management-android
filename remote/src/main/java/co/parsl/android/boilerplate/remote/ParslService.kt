@@ -1,65 +1,44 @@
 package co.parsl.android.boilerplate.remote
 
 import co.parsl.android.boilerplate.remote.model.Ledger
+import co.parsl.android.boilerplate.remote.model.ProductContent
 import co.parsl.android.boilerplate.remote.model.TagInfoModel
 import co.parsl.android.boilerplate.remote.model.TagInfoPojo
 import retrofit2.Call
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ParslService {
 
     @GET("secured/tags/{tagId}")
     fun getTagInfo(
-            @Path("tagId") tagId : String,
-            @Header("Authorization") token : String
-    ) : Call<TagInfoPojo>
+            @Path("tagId") tagId: String,
+            @Header("Authorization") token: String
+    ): Call<TagInfoPojo>
 
     data class GetTagInfoResponse(val tagInfo: TagInfoModel)
 
     @GET("secured/tags/{tagId}/ledger")
-    fun getLedger(@Path("tagId") tagId : String,
-                      @Header("Authorization") token : String) : Call<Ledger>
+    fun getLedger(@Path("tagId") tagId: String,
+                  @Header("Authorization") token: String): Call<Ledger>
 
-    /*
-    {
-    "elements": [
-        {
-            "user": "4b8357bb-f817-4546-a61a-0f9cfbcfc9e6",
-            "transactionTs": "2018-11-28 11:43:45.796",
-            "action": "TAKEOVER"
-        },
-        {
-            "user": "4b8357bb-f817-4546-a61a-0f9cfbcfc9e6",
-            "transactionTs": "2018-11-28 11:43:45.823",
-            "action": "HANDOVER_SEND"
-        }
-    ],
-    "totalPages": 1,
-    "totalElements": 2
-    }
-     */
+    @GET("secured/product_categories/")
+    fun getProductCategories(@Header("Authorization") token: String): Call<ProductContent>
 
-    @POST("secured/tags/{tagId}/handover")
+    @GET("secured/product_categories/{productCategoryCode}/products")
+    fun getProductsByCatogries(@Path("productCategoryCode") productCategoryCode: String,
+                               @Header("Authorization") token: String): Call<ProductContent>
+
+    @GET("secured/products/{productCode}/batches")
+    fun getBatchesByProduct(@Path("productCode") productCode: String,
+                            @Header("Authorization") token: String): Call<ProductContent>
+
+    @POST("secured/tags/{tagId}/handover?action={handoverAction}")
     fun postHandoverAction(@Path("tagId") tagId : String,
-                           @Query("action") handoverAction: String,
+                           @Path("handoverAction") handoverAction: String,
                            @Header("Authorization") token : String) : Call<Void>
 
 
 }
-
-// EditText TagId
-// Token Shared Prefs
-
-//Buttons
-//SEND
-//RECIEVE
-//SEND_CONFIRM
-//RECEIVE_CONFIRM
-
-//LEDGER
-
-//TAKEOVER, HANDOVER_SEND
-
-//Get products - Select Product
-//Get product batches by product
-////Product batch assign

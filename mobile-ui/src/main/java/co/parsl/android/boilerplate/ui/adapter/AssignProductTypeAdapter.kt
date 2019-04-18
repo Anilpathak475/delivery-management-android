@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import co.parsl.android.boilerplate.ui.model.AssignProductType
+import co.parsl.android.boilerplate.remote.model.ProductCategory
 import co.parsl.android.ui.R
 
 class AssignProductTypeAdapter constructor(var context: Context, btnlistener: BtnClickListener) : RecyclerView.Adapter<AssignProductTypeAdapter.CustomViewHolder>() {
 
-    var assignProductTypes = mutableListOf<AssignProductType>()
+    var productCategorys = mutableListOf<ProductCategory>()
     var mClickListener: BtnClickListener? = null
 
     init {
@@ -20,8 +20,12 @@ class AssignProductTypeAdapter constructor(var context: Context, btnlistener: Bt
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        val productType = assignProductTypes[position]
+        val productType = productCategorys[position]
         holder.nameText.text = productType.name
+        holder.itemView.setOnClickListener {
+            mClickListener!!.onBtnClick(productType)
+            holder.imgOk.background = context.getDrawable(R.drawable.ok)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -32,7 +36,7 @@ class AssignProductTypeAdapter constructor(var context: Context, btnlistener: Bt
     }
 
     override fun getItemCount(): Int {
-        return assignProductTypes.size
+        return productCategorys.size
     }
 
 
@@ -41,16 +45,13 @@ class AssignProductTypeAdapter constructor(var context: Context, btnlistener: Bt
         var imgOk: ImageView
 
         init {
-            nameText = view.findViewById(R.id.text_name)
+            nameText = view.findViewById(R.id.txt_name)
             imgOk = view.findViewById(R.id.img_ok)
-            itemView.setOnClickListener {
-                mClickListener!!.onBtnClick(adapterPosition)
-                imgOk.background = context.getDrawable(R.drawable.ok)
-            }
+
         }
     }
 
     interface BtnClickListener {
-        fun onBtnClick(position: Int)
+        fun onBtnClick(productCategory: ProductCategory)
     }
 }

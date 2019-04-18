@@ -53,13 +53,25 @@
         android:name="co.parsl.android.ui.SelectProductFragment"
         android:label="fragment_select_product"
         tools:layout="@layout/fragment_select_product">
+        <argument
+            android:name="productCategoriesCode"
+            app:argType="string" />
         <action
             android:id="@+id/action_selectProductFragment_to_selectProductBatch"
             app:destination="@id/selectProductBatch" />
+
     </fragment>
     <fragment
         android:id="@+id/selectProductBatch"
         android:name="co.parsl.android.ui.SelectProductBatch"
         android:label="fragment_select_product_batch"
-        tools:layout="@layout/fragment_select_product_batch" />
+        tools:layout="@layout/fragment_select_product_batch">
+        <argument
+            android:name="productCode"
+            app:argType="string" />
+    </fragment>
+    <argument
+        android:name="productCategoriesCode"
+        android:defaultValue='""'
+        app:argType="string" />
 </navigation>

@@ -1,12 +1,28 @@
 package co.parsl.android.ui
 
-import android.content.Context
-import android.net.Uri
+import android.app.Activity
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import co.parsl.android.boilerplate.remote.BufferooServiceFactory
+import co.parsl.android.boilerplate.remote.ParslService
+import co.parsl.android.boilerplate.remote.model.ProductCategory
+import co.parsl.android.boilerplate.remote.model.ProductContent
+import co.parsl.android.boilerplate.ui.adapter.AssignProductTypeAdapter
+import co.parsl.android.boilerplate.ui.home.MainActivity
+import co.parsl.android.boilerplate.ui.widget.ConformationPopUp
+import co.parsl.android.boilerplate.ui.widget.DialogCallback
+import co.parsl.android.boilerplate.ui.widget.NotifyPopUp
+import kotlinx.android.synthetic.main.select_product_catogries.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -24,77 +40,95 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class SelectProductBatch : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
+    val parslService: ParslService = BufferooServiceFactory.makeParslService(BuildConfig.DEBUG)
+    private lateinit var navController: NavController
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    lateinit var adapter: AssignProductTypeAdapter
+    lateinit var activityInstance: Activity
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.select_product_catogries, container, false)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_select_product_batch, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        activityInstance = this.activity!!
+        setAdapter()
+        navController = Navigation.findNavController(view)
+
+        val productCode = SelectProductBatchArgs.fromBundle(arguments).productCode
+        getCategories(productCode)
+
+        /* edt_product_type.addTextChangedListener(object : TextWatcher {
+             override fun afterTextChanged(p0: Editable?) {
+                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+             }
+
+             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+             }
+
+             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+              //   updateAdapter(edt_product_type.text.toString())
+             }
+         })*/
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
-    }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
-        }
-    }
+    private fun getCategories(productCode: String) {
+        val call: Call<ProductContent> = parslService.getBatchesByProduct(productCode, getToken())
 
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
-    }
+        val progressDialog = ProgressDialog(activity)
+        progressDialog.setMessage("Getting tag info...")
+        progressDialog.show()
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
-    }
+        call.enqueue(object : Callback<ProductContent> {
+            override fun onFailure(call: Call<ProductContent>, t: Throwable) {
+                progressDialog.hide()
+                Log.d("Retrofit", "onFailure: ")
+            }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SelectProductBatch.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-                SelectProductBatch().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
-                    }
+            override fun onResponse(call: Call<ProductContent>, response: Response<ProductContent>) {
+                progressDialog.hide()
+                if (response.isSuccessful) {
+                    updateAdapter(response.body()!!.content)
                 }
+            }
+
+        })
+
+    }
+
+    private fun setAdapter() {
+
+        adapter = AssignProductTypeAdapter(activityInstance, object : AssignProductTypeAdapter.BtnClickListener {
+            override fun onBtnClick(productCategory: ProductCategory) {
+                ConformationPopUp(activityInstance, 0, object : DialogCallback {
+                    override fun onYes() {
+                        NotifyPopUp(activityInstance, R.drawable.ok, object : DialogCallback {
+                            override fun onNO() {
+                            }
+
+                            override fun onYes() {
+                            }
+                        })
+                    }
+
+                    override fun onNO() {
+                    }
+                })
+            }
+        })
+        recycler_product_results.adapter = adapter
+    }
+
+
+    private fun getToken(): String {
+        val idToken = MainActivity.readSharedSetting(activity!!.applicationContext, MainActivity.PREF_USER_ID_TOKEN, "")
+        return "Bearer $idToken"
+    }
+
+    fun updateAdapter(products: ArrayList<ProductCategory>) {
+        adapter.productCategorys = products
+        adapter.notifyDataSetChanged()
     }
 }
